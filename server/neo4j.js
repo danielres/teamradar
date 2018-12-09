@@ -12,9 +12,9 @@ const close = () => {
   driver.close()
 }
 
-const query = (...args) => {
+const query = async(...args) => {
   const session = driver.session()
-  const result = session.run(...args)
+  const result = await session.run(...args)
   session.close()
   return result 
 }
