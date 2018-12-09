@@ -1,0 +1,26 @@
+version: '2'
+
+networks:
+  neo4j-network:
+    driver: bridge
+
+services:
+  neo4j:
+    image: bitnami/neo4j:latest
+    volumes:
+      - ./graphdb:/bitnami
+    networks:
+      - neo4j-network
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+    depends_on:
+      - fix-neo4j-permissions
+
+  fix-neo4j-permissions:
+    image: bitnami/neo4j:latest
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+      - ./graphdb:/bitnami
