@@ -1,18 +1,27 @@
 const PORT = 3001
 
 const app =  new (require('koa'))()
-const { neo, runNeoDemo } = require('./neo4j')
+const neo = require('./neo4j')
 const router = new (require('koa-trie-router'))()
+
+const deleteAllNodes = require('./queries/deleteAllNodes')
+const deleteAllRelationships = require('./queries/deleteAllRelationships')
+const insertSeedData = require('./queries/insertSeedData')
 
 app.use(require('koa-morgan')('combined'))
 app.use(require('koa-bodyparser')())
 app.use(router.middleware())
 
-runNeoDemo()
-
 router.get('/api', async ctx => 
   ctx.body = { hello: 'world' }
 )
+
+router.get('/api/data/reset', async ctx => {
+  await deleteAllRelationships()
+  await deleteAllNodes()
+  const result = await insertSeedData()
+  ctx.body = { result }
+})
 
 if (!module.parent) {
   console.log(`[server] listening on http://localhost:${PORT}`)
@@ -20,7 +29,6 @@ if (!module.parent) {
 }
 
 const cleanup = () => {
-  console.log('Closing Neo4j connection...')
   neo.close()
   process.exit(1)
 }
