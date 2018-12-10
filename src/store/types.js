@@ -1,0 +1,1 @@
+export const FETCH_TAGS_SUCCESS = 'FETCH_TAGS_SUCCESS'
