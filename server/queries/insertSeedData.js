@@ -1,8 +1,8 @@
 const neo = require('../neo4j')
 
-
-const createAlice = () => 
-  neo.query(`
+const createAlice = () =>
+  neo.query(
+    `
     CREATE 
       (person:Person { name: $person } ) 
     -[:HAS_SKILL { weight: 5 }]-> 
@@ -16,8 +16,9 @@ const createAlice = () =>
     { tag: 'SEO', tag2: 'Marketing', tag3: 'Communication', person: 'Alice' }
   )
 
-const createTom = () => 
-  neo.query(`
+const createTom = () =>
+  neo.query(
+    `
     CREATE 
       (person:Person { name: $person } ) 
     -[:HAS_SKILL { weight: 10 }]-> 

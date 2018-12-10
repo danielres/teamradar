@@ -1,6 +1,6 @@
 const PORT = 3001
 
-const app =  new (require('koa'))()
+const app = new (require('koa'))()
 const neo = require('./neo4j')
 const router = new (require('koa-trie-router'))()
 
@@ -13,9 +13,7 @@ app.use(require('koa-morgan')('combined'))
 app.use(require('koa-bodyparser')())
 app.use(router.middleware())
 
-router.get('/api', async ctx => 
-  ctx.body = { hello: 'world' }
-)
+router.get('/api', async ctx => (ctx.body = { hello: 'world' }))
 
 router.get('/api/tags', async ctx => {
   const tags = await getAllTags()

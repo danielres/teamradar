@@ -1,4 +1,3 @@
-
 const neo4j = require('neo4j-driver').v1
 
 const password = 'bitnami'
@@ -12,11 +11,11 @@ const close = () => {
   driver.close()
 }
 
-const query = async(...args) => {
+const query = async (...args) => {
   const session = driver.session()
   const result = await session.run(...args)
   session.close()
-  return result 
+  return result
 }
 
 module.exports = { driver, close, query }
