@@ -2,6 +2,7 @@
   "name": "teamup",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
