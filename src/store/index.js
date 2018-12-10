@@ -16,9 +16,7 @@ const rootReducer = combineReducers({
 
 const enhancers = []
 
-const middlewares = [
-  thunkMiddleware,
-]
+const middlewares = [thunkMiddleware]
 
 const compose =
   REACT_APP_ENABLE_REDUX_DEVTOOLS === 'true'

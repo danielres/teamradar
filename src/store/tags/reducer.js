@@ -1,6 +1,4 @@
-import {
-  FETCH_TAGS_SUCCESS,
-} from '../types'
+import { FETCH_TAGS_SUCCESS } from '../types'
 
 const initialState = {
   items: [],
@@ -11,9 +9,9 @@ export default (state = initialState, { type, payload }) => {
     case FETCH_TAGS_SUCCESS:
       return {
         ...state,
-        items: payload.tags
+        items: payload.tags,
       }
-      
+
     default:
       return state
   }
