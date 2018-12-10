@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
+    "d3": "^5.7.0",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-morgan": "^1.0.1",
