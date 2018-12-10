@@ -9,6 +9,7 @@ services:
     image: bitnami/neo4j:3.4.10
     volumes:
       - ./graphdb:/bitnami
+      - ./graphdb/plugins:/bitnami/neo4j/plugins
     networks:
       - neo4j-network
     ports:
@@ -23,4 +24,4 @@ services:
     user: root
     command: chown -R 1001:1001 /bitnami
     volumes:
-      - ./graphdb:/bitnami
+      - ./graphdb/neo4j:/bitnami/neo4j
