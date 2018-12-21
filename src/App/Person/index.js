@@ -1,14 +1,10 @@
 import { connect } from 'react-redux'
 
 import Person from './Person'
+import { selectPerson } from 'store/persons/selectors'
 
-const mapStateToProps = ({
-  location: {
-    payload: { id },
-  },
-  persons,
-}) => ({
-  person: persons.items.find(p => p.id.toString() === id),
+const mapStateToProps = state => ({
+  person: selectPerson(state),
 })
 
 const mapDispatchToProps = () => ({})
