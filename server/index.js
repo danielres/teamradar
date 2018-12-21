@@ -4,6 +4,7 @@ const app = new (require('koa'))()
 const neo = require('./neo4j')
 const router = new (require('koa-trie-router'))()
 
+const getAllPersons = require('./queries/getAllPersons')
 const getAllTags = require('./queries/getAllTags')
 const deleteAllNodes = require('./queries/deleteAllNodes')
 const deleteAllRelationships = require('./queries/deleteAllRelationships')
@@ -14,6 +15,11 @@ app.use(require('koa-bodyparser')())
 app.use(router.middleware())
 
 router.get('/api', async ctx => (ctx.body = { hello: 'world' }))
+
+router.get('/api/persons', async ctx => {
+  const persons = await getAllPersons()
+  ctx.body = { persons }
+})
 
 router.get('/api/tags', async ctx => {
   const tags = await getAllTags()
