@@ -6,11 +6,13 @@ import {
 } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
+import personsReducer from './persons/reducer.js'
 import tagsReducer from './tags/reducer.js'
 
 const { REACT_APP_ENABLE_REDUX_DEVTOOLS } = process.env
 
 const rootReducer = combineReducers({
+  persons: personsReducer,
   tags: tagsReducer,
 })
 
