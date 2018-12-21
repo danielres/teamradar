@@ -1,6 +1,8 @@
-import React from 'react'
-import { toPerson } from 'store/routerActions'
 import Link from 'redux-first-router-link'
+import React from 'react'
+
+import { toPerson } from 'store/routerActions'
+
 const PersonsList = ({ persons }) => (
   <ul>
     {persons.map(p => (
