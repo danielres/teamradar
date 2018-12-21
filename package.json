@@ -15,15 +15,19 @@
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
+    "redux-first-router": "^2.1.1",
+    "redux-first-router-link": "^2.0.1",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "dev": "concurrently 'yarn start' 'yarn s:start'",
+    "dev": "concurrently 'yarn start' 'yarn s:start' 'yarn docker:up'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "s:start": "nodemon server/index.js"
+    "s:start": "nodemon server/index.js",
+    "docker:reset": "docker-compose down && docker-compose rm -f",
+    "docker:up": "docker-compose up"
   },
   "eslintConfig": {
     "extends": "react-app"
