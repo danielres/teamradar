@@ -1,8 +1,8 @@
 const neo = require('../neo4j')
 
-const format = ({ child_of, name }) => ({ 
-  name, 
-  tags: child_of ? child_of.map(format) : undefined 
+const format = ({ child_of, name }) => ({
+  name,
+  tags: child_of ? child_of.map(format) : undefined,
 })
 
 module.exports = async () => {
@@ -12,6 +12,6 @@ module.exports = async () => {
     CALL apoc.convert.toTree(ps) yield value
     RETURN value
   `)
-  
+
   return records.map(r => format(r.toObject().value))
 }
