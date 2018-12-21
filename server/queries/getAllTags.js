@@ -1,6 +1,7 @@
 const neo = require('../neo4j')
 
-const format = ({ child_of, name }) => ({
+const format = ({ child_of, name, _id: id }) => ({
+  id: id.toNumber(),
   name,
   tags: child_of ? child_of.map(format) : undefined,
 })
