@@ -6,7 +6,7 @@ import TagsTree from './TagsTree'
 import PersonsList from './PersonsList'
 
 const App = () => (
-  <div class="App">
+  <div className="App">
     <TagsGraph />
     <h2>Tags</h2>
     <TagsTree />
