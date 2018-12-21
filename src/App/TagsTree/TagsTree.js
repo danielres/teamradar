@@ -3,7 +3,7 @@ import React from 'react'
 const TagsTree = ({ tags }) => (
   <ul>
     {tags.map(t => (
-      <li>
+      <li key={t.id}>
         {t.name}
         {t.tags && <TagsTree tags={t.tags} />}
       </li>
