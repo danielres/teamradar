@@ -10,6 +10,7 @@ const getPersonWithFriendsById = require('./queries/getPersonWithFriendsById')
 const deleteAllNodes = require('./queries/deleteAllNodes')
 const deleteAllRelationships = require('./queries/deleteAllRelationships')
 const insertSeedData = require('./queries/insertSeedData')
+const addPersonSlugUniqueConstraint = require('./queries/addPersonSlugUniqueConstraint')
 
 app.use(require('koa-morgan')('combined'))
 app.use(require('koa-bodyparser')())
@@ -33,10 +34,21 @@ router.get('/api/tags', async ctx => {
 })
 
 router.post('/api/dev/db/reset', async ctx => {
-  await deleteAllRelationships()
-  await deleteAllNodes()
-  const result = await insertSeedData()
-  ctx.body = { result }
+  try {
+    await deleteAllRelationships()
+    await deleteAllNodes()
+    await addPersonSlugUniqueConstraint()
+
+    const result = await insertSeedData()
+    ctx.body = { result }
+  } catch (error) {
+    console.log(error)
+    const message = error.code.includes('ConstraintValidationFailed')
+      ? 'ConstraintValidationFailed'
+      : error.messsage
+    ctx.status = 500
+    ctx.body = { error: message }
+  }
 })
 
 if (!module.parent) {
