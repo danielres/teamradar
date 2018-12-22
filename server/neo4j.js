@@ -6,8 +6,8 @@ const user = 'neo4j'
 
 const driver = neo4j.driver(uri, neo4j.auth.basic(user, password))
 
-const close = () => {
-  console.log('[neo4j] Closing Neo4j connection...')
+const close = ({ silent } = {}) => {
+  !silent && console.log('[neo4j] Closing Neo4j connection...')
   driver.close()
 }
 

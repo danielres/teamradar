@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const args = process.argv.slice(2)
+const cmd = args[0]
+
+const Umzug = require('umzug')
+const neo = require('../neo4j')
+
+const umzug = new Umzug({
+  storage: 'json',
+  storageOptions: { path: 'server/db/migrations/meta.json' },
+
+  logging: console.log,
+
+  migrations: {
+    path: 'server/db/migrations',
+    wrap: migrate => () => migrate().then(() => neo.close({ silent: true })),
+  },
+})
+
+switch (cmd) {
+  case 'down':
+    return umzug.down()
+  case 'reset':
+    return umzug.down({ to: 0 })
+  case 'up':
+  default:
+    return umzug.up()
+}

@@ -29,6 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "s:start": "nodemon server/index.js",
+    "db:migrate": "server/db/migrate",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:up": "docker-compose up"
   },
