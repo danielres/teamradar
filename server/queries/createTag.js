@@ -2,8 +2,8 @@ const uuid = require('uuid4')
 
 const neo = require('../neo4j')
 
-module.exports = ({ name }) =>
-  neo.query(
+module.exports = async ({ name }) => {
+  const response = await neo.query(
     `
       CREATE (tag:Tag { id: $id, name: $name } ) 
       RETURN tag
@@ -13,3 +13,5 @@ module.exports = ({ name }) =>
       name,
     }
   )
+  return response.records[0].toObject().tag.properties
+}
