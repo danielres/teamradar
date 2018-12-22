@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import Link from 'redux-first-router-link'
 
 import './App.css'
 import TagsGraph from './TagsGraph'
@@ -39,7 +40,10 @@ const Grid = styled.div`
 
 const App = ({ page }) => (
   <>
-    <TagsGraph />
+    <Link to={page === 'DEV' ? '/' : '/dev'}>
+      <TagsGraph />
+    </Link>
+
     {page === 'DEV' ? (
       <Dev />
     ) : (
