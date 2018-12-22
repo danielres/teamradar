@@ -1,51 +1,40 @@
-const neo = require('../neo4j')
-const uuid = require('uuid4')
-
-const createAlice = () =>
-  neo.query(
-    `
-    CREATE 
-      (person:Person { id: $id, name: $name, slug: $slug } ) 
-    -[:HAS_SKILL { weight: 5 }]-> 
-      (tag:Tag {name: $tag}) 
-    -[:CHILD_OF]-> 
-      (tag2:Tag {name: $tag2})
-    -[:CHILD_OF]-> 
-      (tag3:Tag {name: $tag3})
-    RETURN person,tag,tag2,tag3
-    `,
-    {
-      id: uuid(),
-      name: 'Alice',
-      slug: 'alice',
-      tag: 'SEO',
-      tag2: 'Marketing',
-      tag3: 'Communication',
-    }
-  )
-
-const createTom = () =>
-  neo.query(
-    `
-    CREATE 
-      (person:Person { id: $id, name: $name, slug: $slug } ) 
-    -[:HAS_SKILL { weight: 10 }]-> 
-      (tag:Tag {name: $tag}) 
-    -[:CHILD_OF]-> 
-      (tag2:Tag {name: $tag2})
-    RETURN person,tag,tag2
-    `,
-    {
-      id: uuid(),
-      name: 'Tom',
-      slug: 'tom',
-      tag: 'ReactJS',
-      tag2: 'development',
-    }
-  )
+const createPerson = require('./createPerson')
+const createRel = require('./createRelationship')
+const createTag = require('./createTag')
 
 module.exports = async () => {
-  const alice = await createAlice()
-  const tom = await createTom()
-  return { alice, tom }
+  const tags = await Promise.all([
+    createTag({ name: 'Skydiving' }),
+    createTag({ name: 'Sport' }),
+    createTag({ name: 'SEO' }),
+    createTag({ name: 'Marketing' }),
+    createTag({ name: 'Communication' }),
+    createTag({ name: 'ReactJs' }),
+    createTag({ name: 'Development' }),
+  ])
+
+  const [skydiving, sport, seo, marketing, comm, react, development] = tags
+
+  const persons = await Promise.all([
+    createPerson({ name: 'Alice', slug: 'alice' }),
+    createPerson({ name: 'Jack', slug: 'jack' }),
+    createPerson({ name: 'John', slug: 'john' }),
+    createPerson({ name: 'Tom', slug: 'tom' }),
+  ])
+
+  const [alice, jack, john] = persons
+
+  const friendships = await Promise.all([
+    createRel({ fromId: jack.id, toId: john.id, type: 'HAS_FRIEND' }),
+    createRel({ fromId: alice.id, toId: john.id, type: 'HAS_FRIEND' }),
+  ])
+
+  const tagRels = await Promise.all([
+    createRel({ fromId: skydiving.id, toId: sport.id, type: 'CHILD_OF' }),
+    createRel({ fromId: seo.id, toId: marketing.id, type: 'CHILD_OF' }),
+    createRel({ fromId: marketing.id, toId: comm.id, type: 'CHILD_OF' }),
+    createRel({ fromId: react.id, toId: development.id, type: 'CHILD_OF' }),
+  ])
+
+  return { persons, friendships, tagRels }
 }
