@@ -32,7 +32,7 @@ router.get('/api/tags', async ctx => {
   ctx.body = { tags }
 })
 
-router.get('/api/data/reset', async ctx => {
+router.post('/api/dev/db/reset', async ctx => {
   await deleteAllRelationships()
   await deleteAllNodes()
   const result = await insertSeedData()
