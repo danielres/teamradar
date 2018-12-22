@@ -10,7 +10,6 @@ const getPersonWithFriendsById = require('./queries/getPersonWithFriendsById')
 const deleteAllNodes = require('./queries/deleteAllNodes')
 const deleteAllRelationships = require('./queries/deleteAllRelationships')
 const insertSeedData = require('./queries/insertSeedData')
-const addPersonSlugUniqueConstraint = require('./queries/addPersonSlugUniqueConstraint')
 
 app.use(require('koa-morgan')('combined'))
 app.use(require('koa-bodyparser')())
@@ -37,7 +36,6 @@ router.post('/api/dev/db/reset', async ctx => {
   try {
     await deleteAllRelationships()
     await deleteAllNodes()
-    await addPersonSlugUniqueConstraint()
 
     const result = await insertSeedData()
     ctx.body = { result }
