@@ -5,6 +5,10 @@ import { getTags } from 'store/tags/actions'
 import { toHome } from 'store/routerActions'
 
 const routesMap = {
+  DEV: {
+    path: '/dev',
+  },
+
   HOME: {
     path: '/',
     thunk: dispatch => {

@@ -5,6 +5,8 @@ import './App.css'
 import TagsGraph from './TagsGraph'
 import TagsTree from './TagsTree'
 import PersonsList from './PersonsList'
+
+import Dev from './Dev'
 import Person from './Person'
 
 import PadH from 'App/PadH'
@@ -38,25 +40,29 @@ const Grid = styled.div`
 const App = ({ page }) => (
   <>
     <TagsGraph />
-    <Grid>
-      <Col>
-        <ColTitle>Tags</ColTitle>
-        <PadH>
-          <TagsTree />
-        </PadH>
-      </Col>
-
-      <Col>
-        <ColTitle>Persons</ColTitle>
-        <PersonsList />
-      </Col>
-
-      {page === 'PERSON' && (
+    {page === 'DEV' ? (
+      <Dev />
+    ) : (
+      <Grid>
         <Col>
-          <Person />
+          <ColTitle>Tags</ColTitle>
+          <PadH>
+            <TagsTree />
+          </PadH>
         </Col>
-      )}
-    </Grid>
+
+        <Col>
+          <ColTitle>Persons</ColTitle>
+          <PersonsList />
+        </Col>
+
+        {page === 'PERSON' && (
+          <Col>
+            <Person />
+          </Col>
+        )}
+      </Grid>
+    )}
   </>
 )
 
