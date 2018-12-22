@@ -17,8 +17,10 @@ const routesMap = {
     path: '/persons/:id',
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload
+      const isPersonsEmpty = !Object.keys(getState().persons.items).length
+
       dispatch(getTags())
-      await dispatch(getPersons())
+      if (isPersonsEmpty) await dispatch(getPersons())
       dispatch(getPerson(id))
     },
   },
