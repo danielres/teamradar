@@ -6,7 +6,7 @@ const router = new (require('koa-trie-router'))()
 
 const getAllPersons = require('./queries/getAllPersons')
 const getAllTags = require('./queries/getAllTags')
-const getPersonById = require('./queries/getPersonById')
+const getPersonWithFriendsById = require('./queries/getPersonWithFriendsById')
 const deleteAllNodes = require('./queries/deleteAllNodes')
 const deleteAllRelationships = require('./queries/deleteAllRelationships')
 const insertSeedData = require('./queries/insertSeedData')
@@ -23,7 +23,7 @@ router.get('/api/persons', async ctx => {
 })
 
 router.get('/api/persons/:id', async ctx => {
-  const person = await getPersonById(ctx.params.id)
+  const person = await getPersonWithFriendsById(ctx.params.id)
   ctx.body = { person }
 })
 
