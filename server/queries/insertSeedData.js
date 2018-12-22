@@ -5,7 +5,7 @@ const createAlice = () =>
   neo.query(
     `
     CREATE 
-      (person:Person { id: $id, name: $person, slug: $slug } ) 
+      (person:Person { id: $id, name: $name, slug: $slug } ) 
     -[:HAS_SKILL { weight: 5 }]-> 
       (tag:Tag {name: $tag}) 
     -[:CHILD_OF]-> 
@@ -16,7 +16,7 @@ const createAlice = () =>
     `,
     {
       id: uuid(),
-      person: 'Alice',
+      name: 'Alice',
       slug: 'alice',
       tag: 'SEO',
       tag2: 'Marketing',
@@ -28,7 +28,7 @@ const createTom = () =>
   neo.query(
     `
     CREATE 
-      (person:Person { id: $id, name: $person, slug: $slug } ) 
+      (person:Person { id: $id, name: $name, slug: $slug } ) 
     -[:HAS_SKILL { weight: 10 }]-> 
       (tag:Tag {name: $tag}) 
     -[:CHILD_OF]-> 
@@ -37,7 +37,7 @@ const createTom = () =>
     `,
     {
       id: uuid(),
-      person: 'Tom',
+      name: 'Tom',
       slug: 'tom',
       tag: 'ReactJS',
       tag2: 'development',
