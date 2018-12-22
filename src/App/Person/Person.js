@@ -1,10 +1,21 @@
 import React from 'react'
 
+import ColTitle from 'App/ColTitle'
+import PadH from 'App/PadH'
+
 const PersonsList = ({ person }) =>
   person ? (
-    <div>
-      {person.name} <small>({person.id})</small>
-    </div>
+    <>
+      <ColTitle>{person.name}</ColTitle>
+      <PadH>
+        <table>
+          <tr>
+            <td>id:</td>
+            <td>{person.id}</td>
+          </tr>
+        </table>
+      </PadH>
+    </>
   ) : null
 
 export default PersonsList
