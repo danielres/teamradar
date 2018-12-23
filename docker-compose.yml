@@ -1,17 +1,11 @@
 version: '2'
 
-networks:
-  neo4j-network:
-    driver: bridge
-
 services:
   neo4j:
     image: bitnami/neo4j:3.4.10
     volumes:
-      - ./graphdb:/bitnami
-      - ./graphdb/plugins:/bitnami/neo4j/plugins
-    networks:
-      - neo4j-network
+      - ./volumes/neo4j:/bitnami
+      - ./volumes/neo4j/plugins:/bitnami/neo4j/plugins
     ports:
       - '7474:7474'
       - '7473:7473'
@@ -19,9 +13,28 @@ services:
     depends_on:
       - fix-neo4j-permissions
 
+  neo4j-test:
+    image: bitnami/neo4j:3.4.10
+    volumes:
+      - ./tmp/volumes/neo4j-test:/bitnami
+      - ./volumes/neo4j/plugins:/bitnami/neo4j/plugins
+    ports:
+      - '17474:7474'
+      - '17473:7473'
+      - '17687:7687'
+    depends_on:
+      - fix-neo4j-test-permissions
+
   fix-neo4j-permissions:
     image: bitnami/neo4j:3.4.10
     user: root
     command: chown -R 1001:1001 /bitnami
     volumes:
-      - ./graphdb/neo4j:/bitnami/neo4j
+      - ./volumes/neo4j/neo4j:/bitnami/neo4j
+
+  fix-neo4j-test-permissions:
+    image: bitnami/neo4j:3.4.10
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+      - ./tmp/volumes/neo4j-test/neo4j:/bitnami/neo4j
