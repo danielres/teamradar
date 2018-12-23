@@ -29,7 +29,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "s:start": "nodemon server/index.js",
-    "db:migrate": "server/db/migrate",
+    "s:test:once": "jest server --env=node --runInBand --verbose",
+    "db:migrate": "NODE_ENV=dev server/db/migrate",
+    "db:test:reset": "NODE_ENV=test server/db/migrate reset && NODE_ENV=test server/db/migrate",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:up": "docker-compose up"
   },

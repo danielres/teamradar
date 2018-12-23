@@ -1,6 +1,8 @@
 volumes/neo4j/neo4j
 tmp
-server/db/migrations/meta.json
+server/db/meta.json
+server/db/meta-dev.json
+server/db/meta-test.json
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
