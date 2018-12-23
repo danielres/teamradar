@@ -31,12 +31,16 @@ const Preview = styled.pre`
   margin: 0;
 `
 
+const Button = styled.button.attrs({
+  className: 'bg-white-20 br2 dim f6 ph3 pv2 white',
+})``
+
 const Dev = ({ preview, resetAndSeedDb }) => (
   <Grid>
     <Col>
       <ColTitle>Dev</ColTitle>
       <PadH>
-        <button onClick={resetAndSeedDb}>Reset & seed db</button>
+        <Button onClick={resetAndSeedDb}>Reset & seed db</Button>
       </PadH>
     </Col>
     <Col>{preview && <Preview>{preview}</Preview>}</Col>
