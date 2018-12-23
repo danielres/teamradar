@@ -4,11 +4,11 @@ const app = new (require('koa'))()
 const neo = require('./neo4j')
 const router = new (require('koa-trie-router'))()
 
+const teardown = require('./helpers/neo4j/teardown')
+
 const getAllPersons = require('./queries/getAllPersons')
 const getAllTags = require('./queries/getAllTags')
 const getPersonWithFriendsById = require('./queries/getPersonWithFriendsById')
-const deleteAllNodes = require('./queries/deleteAllNodes')
-const deleteAllRelationships = require('./queries/deleteAllRelationships')
 const insertSeedData = require('./queries/insertSeedData')
 
 app.use(require('koa-morgan')('combined'))
@@ -34,8 +34,7 @@ router.get('/api/tags', async ctx => {
 
 router.post('/api/dev/db/reset', async ctx => {
   try {
-    await deleteAllRelationships()
-    await deleteAllNodes()
+    await teardown()
 
     const result = await insertSeedData()
     ctx.body = { result }
