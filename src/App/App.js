@@ -2,7 +2,9 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import Link from 'redux-first-router-link'
 
+import 'tachyons/css/tachyons.css'
 import './App.css'
+
 import TagsGraph from './TagsGraph'
 import TagsTree from './TagsTree'
 import PersonsList from './PersonsList'
