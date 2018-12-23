@@ -1,5 +1,3 @@
 import styled from 'styled-components/macro'
 
-export default styled.div`
-  padding: 0 20px;
-`
+export default styled.div.attrs({ className: 'ph3' })``
