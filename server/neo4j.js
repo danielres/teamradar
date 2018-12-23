@@ -1,10 +1,11 @@
 const neo4j = require('neo4j-driver').v1
 
-const password = 'bitnami'
-const uri = 'bolt://localhost'
-const user = 'neo4j'
+const { NEO4J_PASSWORD, NEO4J_URI, NEO4J_USER } = process.env
 
-const driver = neo4j.driver(uri, neo4j.auth.basic(user, password))
+const driver = neo4j.driver(
+  NEO4J_URI,
+  neo4j.auth.basic(NEO4J_USER, NEO4J_PASSWORD)
+)
 
 const close = ({ silent } = {}) => {
   !silent && console.log('[neo4j] Closing Neo4j connection...')

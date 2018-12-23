@@ -23,7 +23,7 @@
     "uuid4": "^1.1.4"
   },
   "scripts": {
-    "dev": "concurrently 'yarn start' 'yarn s:start' 'yarn docker:up'",
+    "dev": "concurrently 'yarn start' 'NODE_ENV=dev yarn s:start' 'yarn docker:up'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

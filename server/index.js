@@ -1,4 +1,4 @@
-const PORT = 3001
+require('./helpers/dotenv/loadenv')
 
 const app = new (require('koa'))()
 const neo = require('./neo4j')
@@ -50,8 +50,9 @@ router.post('/api/dev/db/reset', async ctx => {
 })
 
 if (!module.parent) {
-  console.log(`[server] listening on http://localhost:${PORT}`)
-  app.listen(PORT)
+  const { SERVER_PORT } = process.env
+  console.log(`[server] listening on http://localhost:${SERVER_PORT}`)
+  app.listen(SERVER_PORT)
 }
 
 const cleanup = () => {
