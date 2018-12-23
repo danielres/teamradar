@@ -31,7 +31,7 @@
     "s:start": "nodemon server/index.js",
     "s:test:once": "jest server --env=node --runInBand --verbose",
     "db:migrate": "NODE_ENV=dev server/db/migrate",
-    "db:test:reset": "NODE_ENV=test server/db/migrate reset && NODE_ENV=test server/db/migrate",
+    "db:test:reset": "NODE_ENV=test server/db/migrate reset",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:up": "docker-compose up"
   },

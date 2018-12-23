@@ -26,12 +26,17 @@ const umzug = new Umzug({
   },
 })
 
-switch (cmd) {
-  case 'down':
-    return umzug.down()
-  case 'reset':
-    return umzug.down({ to: 0 })
-  case 'up':
-  default:
-    return umzug.up()
+const exec = async () => {
+  switch (cmd) {
+    case 'down':
+      return umzug.down()
+    case 'reset':
+      await umzug.down({ to: 0 })
+      return umzug.up()
+    case 'up':
+    default:
+      return umzug.up()
+  }
 }
+
+exec()
