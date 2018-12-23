@@ -29,6 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "s:start": "nodemon server/index.js",
+    "s:test": "yarn s:test:once --watch",
     "s:test:once": "jest server --env=node --runInBand --verbose",
     "db:migrate": "NODE_ENV=dev server/db/migrate",
     "db:test:reset": "NODE_ENV=test server/db/migrate reset",
